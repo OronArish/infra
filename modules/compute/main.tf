@@ -5,6 +5,10 @@ resource "aws_eks_cluster" "eks-cluster" {
   vpc_config {
     subnet_ids = var.subnet_ids
   }
+  access_config {
+    authentication_mode                         = "API"
+    bootstrap_cluster_creator_admin_permissions = true
+  }
 
   tags = merge(var.common_tags, { Name = "oron-eks-cluster" })
 }
@@ -79,3 +83,5 @@ resource "aws_security_group" "instance_sg" {
     { Name = "oron-terraform-sg" }
   )
 }
+
+
