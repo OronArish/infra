@@ -18,4 +18,4 @@ max_capacity     = 3
 min_capacity     = 1
 
 # Argocd variables
-namespace = "argo"
+namespace = "argocd"
