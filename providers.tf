@@ -33,7 +33,7 @@ provider "kubernetes" {
 }
 
 data "aws_eks_cluster_auth" "eks" {
-  name = module.eks.eks_cluster_name
+  name = module.compute.eks_cluster_name
 }
 
 
