@@ -1,3 +1,4 @@
+# cluster resource
 resource "aws_eks_cluster" "eks-cluster" {
   name     = "oron-eks-cluster"
   role_arn = aws_iam_role.eks_cluster_role.arn
@@ -18,6 +19,7 @@ resource "aws_eks_addon" "eks-cluster-ebs" {
   addon_name   = "aws-ebs-csi-driver"
 }
 
+# node resource
 resource "aws_eks_node_group" "worker_node_group" {
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "oron-eks-node-group"
@@ -41,7 +43,6 @@ resource "aws_eks_node_group" "worker_node_group" {
     aws_iam_role_policy_attachment.eks_cni_policy_attachment,
     aws_iam_role_policy_attachment.eks_ecr_policy_attachment,
     aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
-    aws_iam_role_policy_attachment.eks-cluster-ebs
   ]
 
   tags = merge(
@@ -91,4 +92,10 @@ resource "aws_security_group" "instance_sg" {
   )
 }
 
+resource "null_resource" "update_kubeconfig" {
+  provisioner "local-exec" {
+    command = "aws eks update-kubeconfig --name ${aws_eks_cluster.eks-cluster.name} --region ${aws_eks_cluster.eks-cluster.region}"
+  }
+  depends_on = [aws_eks_cluster.eks-cluster]
+}
 

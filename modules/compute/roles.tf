@@ -1,3 +1,4 @@
+# cluster roles
 resource "aws_iam_role" "eks_cluster_role" {
   name = "oron-eks-cluster-role"
 
@@ -15,6 +16,7 @@ resource "aws_iam_role" "eks_cluster_role" {
   tags = var.common_tags
 }
 
+
 resource "aws_iam_role_policy_attachment" "eks_cluster_role_attachment" {
   role       = aws_iam_role.eks_cluster_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
@@ -25,11 +27,8 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSVPCResourceController" {
   role       = aws_iam_role.eks_cluster_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "eks-cluster-ebs" {
-  role       = aws_iam_role.eks_cluster_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-}
 
+# node roles
 resource "aws_iam_role" "eks_node_group_role" {
   name = "oron-eks-node-group-role"
 
@@ -47,6 +46,7 @@ resource "aws_iam_role" "eks_node_group_role" {
   tags = var.common_tags
 }
 
+
 resource "aws_iam_role_policy_attachment" "eks_node_group_role_attachment" {
   role       = aws_iam_role.eks_node_group_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
@@ -60,4 +60,9 @@ resource "aws_iam_role_policy_attachment" "eks_cni_policy_attachment" {
 resource "aws_iam_role_policy_attachment" "eks_ecr_policy_attachment" {
   role       = aws_iam_role.eks_node_group_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
+resource "aws_iam_role_policy_attachment" "nodes-ebs" {
+  role       = aws_iam_role.eks_node_group_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 }

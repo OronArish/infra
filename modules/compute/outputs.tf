@@ -9,3 +9,7 @@ output "cluster_endpoint" {
 output "cluster_certificate_authority_data" {
   value = aws_eks_cluster.eks-cluster.certificate_authority.0.data
 }
+
+# output "cluster_region" {
+#   value = aws_eks_cluster.eks-cluster.region
+# }
