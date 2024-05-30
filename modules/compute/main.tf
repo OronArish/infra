@@ -13,6 +13,11 @@ resource "aws_eks_cluster" "eks-cluster" {
   tags = merge(var.common_tags, { Name = "oron-eks-cluster" })
 }
 
+resource "aws_eks_addon" "eks-cluster-ebs" {
+  cluster_name = aws_eks_cluster.eks-cluster.name
+  addon_name   = "aws-ebs-csi-driver"
+}
+
 resource "aws_eks_node_group" "worker_node_group" {
   cluster_name    = aws_eks_cluster.eks-cluster.name
   node_group_name = "oron-eks-node-group"
@@ -35,6 +40,8 @@ resource "aws_eks_node_group" "worker_node_group" {
     aws_iam_role_policy_attachment.eks_node_group_role_attachment,
     aws_iam_role_policy_attachment.eks_cni_policy_attachment,
     aws_iam_role_policy_attachment.eks_ecr_policy_attachment,
+    aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
+    aws_iam_role_policy_attachment.eks-cluster-ebs
   ]
 
   tags = merge(
