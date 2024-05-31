@@ -13,8 +13,8 @@ common_tags = {
 
 # EKS-specific variables
 instance_type    = "t3a.medium"
-desired_capacity = 2
-max_capacity     = 3
+desired_capacity = 3
+max_capacity     = 4
 min_capacity     = 1
 
 # Argocd variables

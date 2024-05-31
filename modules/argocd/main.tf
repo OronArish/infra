@@ -42,17 +42,12 @@ resource "kubernetes_namespace" "ingress-nginx" {
   }
 }
 
-resource "kubernetes_namespace" "prometheus" {
+resource "kubernetes_namespace" "prometheus-stack" {
   metadata {
     name = "monitoring"
   }
 }
 
-resource "kubernetes_namespace" "grafana" {
-  metadata {
-    name = "monitoring"
-  }
-}
 
 
 
