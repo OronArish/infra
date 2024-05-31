@@ -92,10 +92,5 @@ resource "aws_security_group" "instance_sg" {
   )
 }
 
-resource "null_resource" "update_kubeconfig" {
-  provisioner "local-exec" {
-    command = "aws eks update-kubeconfig --name ${aws_eks_cluster.eks-cluster.name} --region ${aws_eks_cluster.eks-cluster.region}"
-  }
-  depends_on = [aws_eks_cluster.eks-cluster]
-}
+
 
