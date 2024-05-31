@@ -42,5 +42,18 @@ resource "kubernetes_namespace" "ingress-nginx" {
   }
 }
 
+resource "kubernetes_namespace" "prometheus" {
+  metadata {
+    name = "monitoring"
+  }
+}
+
+resource "kubernetes_namespace" "grafana" {
+  metadata {
+    name = "monitoring"
+  }
+}
+
+
 
 
