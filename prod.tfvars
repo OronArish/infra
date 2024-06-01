@@ -12,7 +12,7 @@ common_tags = {
 }
 
 # EKS-specific variables
-instance_type    = "t3a.medium"
+instance_type    = "t3a.large"
 desired_capacity = 3
 max_capacity     = 4
 min_capacity     = 1
