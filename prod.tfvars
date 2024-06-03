@@ -19,4 +19,3 @@ min_capacity     = 1
 
 # Argocd variables
 namespace              = "argocd"
-argocd_ssh_secret_name = "ssh-gitlab"

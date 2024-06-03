@@ -23,5 +23,4 @@ module "compute" {
 module "argocd" {
   source                 = "./modules/argocd"
   namespace              = var.namespace
-  argocd_ssh_secret_name = var.argocd_ssh_secret_name
 }
