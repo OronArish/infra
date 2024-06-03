@@ -3,7 +3,4 @@ variable "namespace" {
   type        = string
 }
 
-variable "argocd_ssh_secret_name" {
-  description = "argocd ssh secret name"
-  type        = string
-}
+
