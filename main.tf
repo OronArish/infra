@@ -21,6 +21,6 @@ module "compute" {
 }
 
 module "argocd" {
-  source                 = "./modules/argocd"
-  namespace              = var.namespace
+  source    = "./modules/argocd"
+  namespace = var.namespace
 }
