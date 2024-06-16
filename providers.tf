@@ -15,9 +15,11 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "oron-carapp-portfolio"
-    key    = "terraform.tfstate"
-    region = "ap-south-1"
+    bucket         = "oron-carapp-portfolio"
+    key            = "terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "oron-tf-state-lock"
+    encrypt        = true
   }
 }
 
